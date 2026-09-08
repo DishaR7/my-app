@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://my-app-backend-gnlm.onrender.com";
 
 export async function getVehicles() {
   const response = await fetch(`${API_URL}/vehicles`);
