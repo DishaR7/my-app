@@ -4,16 +4,14 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "https://my-app-disha-91b5.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://my-app-disha-91b5.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
