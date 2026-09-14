@@ -15,7 +15,7 @@ function App() {
 
   //Load vehicles
   useEffect(() => {
-  fetchVehicles();
+    fetchVehicles();
   }, []);
 
 const fetchVehicles = async () => {
