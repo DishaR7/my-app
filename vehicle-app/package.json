@@ -11,7 +11,7 @@
     "start": "react-scripts start",
     "test": "vitest run",
     "dev": "vite",
-    "build": "vite build"
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
