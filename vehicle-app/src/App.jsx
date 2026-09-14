@@ -3,7 +3,12 @@ import "./App.css";
 import VehicleList from "./components/VehicleList";
 import NewVehicleForm from "./components/NewVehicleForm";
 import VehicleDetail from "./components/VehicleDetail";
-import { getVehicles, addVehicle as addVehicleApi } from "./services/api";
+import {
+  getVehicles,
+  addVehicle as addVehicleApi,
+  updateVehicle as updateVehicleApi,
+  deleteVehicle as deleteVehicleApi
+} from "./services/api";
 
 function App() {
   const [page, setPage] = useState("list");
@@ -71,21 +76,42 @@ function App() {
     }
   }
 
-  function updateVehicle(updatedVehicle) {
-    let newList = vehicles.map(function (v) {
-      if (v.id === updatedVehicle.id) {
-        return updatedVehicle;
-      } else {
-        return v;
-      }
-    });
+async function updateVehicle(updatedVehicle) {
+  try {
+    const savedVehicle = await updateVehicleApi(
+      updatedVehicle.id,
+      updatedVehicle
+    );
 
-    setVehicles(newList);
+    setVehicles(
+      vehicles.map(function (v) {
+        if (v.id === savedVehicle.id) {
+          return savedVehicle;
+        } else {
+          return v;
+        }
+      })
+    );
+  } catch (err) {
+    setError("Failed to update vehicle");
   }
+}
 
-  function deleteVehicle(id) {
-    setVehicles(vehicles.filter((v) => v.id !== id));
+  async function deleteVehicle(id) {
+  try {
+    await deleteVehicleApi(id);
+
+    setVehicles(
+      vehicles.filter(function (v) {
+        return v.id !== id;
+      })
+    );
+
+    goTo("/");
+  } catch (err) {
+    setError("Failed to delete vehicle");
   }
+}
 
   return (
     <div className="app-container">
